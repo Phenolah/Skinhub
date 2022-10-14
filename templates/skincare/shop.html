@@ -1,0 +1,66 @@
+{% extends "skincare/about.html" %}
+{% block content %}
+{%load cloudinary%}
+
+<! ----------- single product details ---------- >
+      <div class="small-container single-product ">
+           <div class="row">
+               <div class="col-2">
+                   <img src="{{item_product_image_instance.url}}" width="85%" alt="no image">
+                   {# Renders an IMG tag for a CloudinaryImage objects. #}
+                   {# THUMBNAIL defined in context_processors #}
+                   {% cloudinary photo.image THUMBNAIL %}
+               </div>
+               <br>
+               <br>
+               <div class="col-2">
+                   <p>Snail mucin Essence</p>
+                   <h2> A hydrating essence</h2>
+                   <h4>Kshs 2500</h4>
+                   <select name="" id="">
+                       <option> Select Size</option>
+                       <option>Medium</option>
+                   </select>
+                   <input type="number" value="0">
+                   <br>
+                   <br>
+                   <a href="{% url "cart" %}" class="btn"> Add To Cart</a>
+                   <br>
+                   <br>
+                    <h3> Product Details <i class="fas fa-indent"></i> </h3>
+                   <br>
+                   <p> Snail  mucin hydrates your skin, soothens inflammation,
+                       aids in skin healing and promotes collagen production. </p>
+               </div>
+           </div>
+ <br>
+          
+<! ----------- products ------------>
+<div class="small-container">
+    {% for item in items %}
+         <div class="row">
+             <div class="col-4">
+                 <form method="post" enctype="multipart/form-data" action=""  >
+                 {% csrf_token %}
+                 {{ backend_form }}
+                 <input type="submit" value="Upload">
+                 </form>
+                 {% cloudinary posted.image THUMBNAIL %}
+                 <h4> {{item.tittle}} </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                 </div>
+                 <p>{{item.price}}</p>
+
+             </div>
+         </div>
+</div>
+         </div>
+
+
+{% endfor %}
+{% endblock %}
