@@ -10,8 +10,7 @@ def blog(request):
     return render(request, "skincare/blog.html")
 def shop(request):
     items = Item.objects.all()
-    direct_form = PhotoUnsignedDirectForm()
-    context = dict(items =items, backend_form = PhotoForm(), direct_form =direct_form)
+    context = dict(items =items, backend_form = PhotoForm())
     if request.method == "POST":
         form = PhotoForm(request.POST, request.FILES)
         context['posted'] = form.instance
