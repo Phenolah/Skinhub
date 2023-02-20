@@ -1,0 +1,56 @@
+{% extends "skincare/about.html" %}
+{% block content %}
+{%load cloudinary%}
+
+<! ----------- single product details ---------- >
+<div class="small-container single-product" >
+          {% for item in items %}
+           <div class="row">
+               <div class="col-2">
+                   <img src="{{item.product_image.url}}" width="80%" alt="no image">
+               </div>
+               <br>
+               <br>
+               <div class="col-2">
+                   <p>{{item.tittle}}</p>
+                   <h2>{{item.brief_description}}</h2>
+                   <p class="lead">
+                       {% if item.discount_price %}
+                      <span>
+                          <del>
+                               Kshs {{item.price}}
+                          </del>
+                      </span>
+
+                       <span>
+                           Kshs {{item.discount_price}}
+                       </span>
+                       {% else %}
+                       <span>
+                           Kshs {{item.price}}
+                       </span>
+                       {% endif %}
+                   </p>
+                   <select name="" id="">
+                       <option> Select Size </option>
+                       <option>{{item.size}}</option>
+                   </select>
+                   <br>
+                   <br>
+                   <a href="{{item.get_cart_url}}" class="btn"> Add To Cart</a>
+                   <a  href="{{item.get_remove_cart_url}}" class="btn"> Remove from cart</a>
+                   <br>
+                   <br>
+                    <h3> Product Details <i class="fas fa-indent"></i> </h3>
+                   <br>
+                   <p> {{item.product_description }}</p>
+                   <a href="{{item.get_absolute_url}}" ></a>
+               </div>
+           </div>
+</div>
+ <br>
+
+
+{% endfor %}
+{% endblock %}
+

@@ -1,0 +1,38 @@
+{% extends "skincare/about.html" %}
+{%load static%}
+{% block content %}
+<div class="account-page">
+   <div class="container">
+       <div class="row">
+           <div class="col-2">
+              <img src="{% static "image/Skincare.JPG"%}" width="500px" alt="">
+           </div>
+           <div class="col-2">
+               <div class="form-container">
+                   <div class="form-btn">
+                       <span  onclick="Login()">login</span>
+                       <hr id="Indicator" width="100px">
+                   </div>
+
+                   <form id="RegForm">
+                       <input type="text" placeholder="Username">
+                       <br>
+                       <br>
+                        <input type="email" placeholder="Email">
+                       <br>
+                       <br>
+                       <input type="Password" placeholder="Password">
+                       <br>
+                       <br>
+                       <button type="submit" class="btn">Register</button>
+
+
+                   </form>
+
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+{% endblock %}

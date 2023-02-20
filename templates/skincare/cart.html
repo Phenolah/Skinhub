@@ -1,0 +1,69 @@
+{% extends "skincare/about.html"%}
+{% load static %}
+{% block content %}
+<div class="small-container cart-page">
+    <div class="table-responsive text-nowrap">
+    <h2>Order Summary</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Item title</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Total Item Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order_item in object.items.all %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ order_item.item.tittle }}</td>
+            <td> Kshs {{ order_item.item.price }}</td>
+            <td>
+                <a href="{% url "remove-single-item-from-cart" order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>
+                {{ order_item.number_of_Products}}
+                <a href="{% url "add-to-cart" order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a>
+            </td>
+            <td>
+            {% if order_item.item.discount_price %}
+                Kshs {{ order_item.discount_total_price}}
+                <span class="badge badge-primary">Saving Kshs {{ order_item.money_saved }}</span>
+            {% else %}
+                Kshs {{ order_item.total_item_price }}
+            {% endif %}
+            <a style='color: red;' href="">
+                <i class="fas fa-trash float-right"></i>
+            </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan='5'>Your cart is empty</td>
+        </tr>
+        <tr>
+            <td colspan="5">
+            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <td colspan="4"><b>Order Total</b></td>
+            <td><b>Kshs {{ object.get_total }}</b></td>
+        </tr>
+        <tr>
+            <td colspan="5">
+            <a class='btn btn-warning float-right ml-2' href='{%url 'checkout'%}'>Proceed to checkout</a>
+            <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    </div>
+
+
+</div>
+{% endblock %}

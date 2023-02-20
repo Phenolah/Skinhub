@@ -1,0 +1,147 @@
+{%load static%}
+{% load cart_template_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="{% static "/css/style.css"%}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css">
+    <link  rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,600&display=swap">
+    <!-----Copy this CDN LINK-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/components/alerts/">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://js.stripe.com/v3/"></script>
+
+
+</head>
+
+
+<body>
+{% if messages %}
+{% for message in messages %}
+<div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+  {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+    <link rel="stylesheet" href="{% static "/css/style.css"%}">
+    <div class="header">
+     <div class="container">
+         <div class="navbar">
+         <div class="logo">
+             <img  src="{% static "image/logoicon1.png" %}" alt="no image found">
+         </div>
+         <nav>
+             <ul>
+                 <li> <a href="{% url "home" %}">Home</a></li>
+                 <li> <a href="{%url "shop" %}">Shop</a></li>
+                 <li> <a href="{% url "about" %}">About</a></li>
+                 <li> <a href="{% url "blog" %}">Blog</a></li>
+                 <li> <a href="{%url "accounts" %}">Account</a></li>
+             </ul>
+             {% if request.customer.is_authenticated %}
+             {{ request.customer|get_cart_count }}
+          <a href=" {% url 'order_summary' %}"  > <img src="{% static "/image/shoppingbag.png"%}" width="30px" height="30px"> </a>
+             {% else %}
+             <a href="{%url 'order_summary' %}">
+                <img src="{% static '/image/shoppingbag.png' %}" width="30px" height="30px">
+             </a>
+             {% endif %}
+             </nav>
+         </div>
+     </div>
+    </div>
+
+
+    {% block content %}
+    <div class="about-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-2">
+                    <img src="{% static "image/Skincare.JPG"%}" width="500px" alt="no image">
+                </div>
+                <div class="col-2">
+                    <h1 >Only Healthy Skin Days Ahead</h1>
+                    <br>
+                    <p> Skin hub is the most trusted skincare store for authentic and affordable skincare
+                        products in Kenya. Developed with your needs in mind, delivering on our promise to provide
+                    more affordable skincare solutions</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <h1> Skinducation </h1>
+                    <h3> We are dedicated to educating our community about all things skincare. We address key
+                    steps in your skincare routine, providing guides on the double cleanse, exfoliation, treatment steps and more</h3>
+                    <br>
+                    <p> Visit our blog page to find out more about skincare</p>
+                    <br>
+                    <a href="{% url "blog"%}" class="btn"> Skin Hub Blog</a>
+
+                </div>
+                <div class="col-2">
+                    <img src="{% static "image/Skincare.JPG"%}"  alt="">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+<! ---------- footer ---------->
+
+    <div class="footer">
+         <div class="container">
+             <div class="row">
+                 <div class="footer-col-1">
+                     <h3> Download Our App</h3>
+                     <p> Download App for Android and ios mobile app. </p>
+                     <div class="app-logo">
+                     <img src="{% static "image/google.jpg"%}">
+                     <img src="{% static "image/apple.jpg"%}">
+                     </div>
+
+                 </div>
+                 <div class="footer-col-2">
+                     <h3> Skin HUB</h3>
+                     <p> Your favourite skincare shop helping<br>
+                         you achieve healthy skin on a budget</p>
+                 </div>
+                 <br>
+                 <div class="footer-col-3">
+                     <h3> Useful links</h3>
+                     <ul>
+                         <li> Offers </li>
+                         <li> Blog Post </li>
+                         <li> Return and Refund Policy </li>
+                         <li> Testimonials  </li>
+                     </ul>
+                 </div>
+                 <div class="footer-col-4">
+                     <h3> Follow us </h3>
+                     <ul>
+                         <li> Facebook</li>
+                         <li> Twitter </li>
+                         <li> Instagram </li>
+                         <li> Tiktok </li>
+                     </ul>
+                 </div>
+             </div>
+             <hr>
+             <p class="copyright">  Copyright 2022 -SkinHub</p>
+         </div>
+     </div>
+
+
+</body>
+</html>
+

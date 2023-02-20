@@ -1,0 +1,41 @@
+{% extends "skincare/about.html" %}
+{%load static%}
+{% block content %}
+
+<! ----------- blog heading ---------- >
+<section id="blog">
+    <div class="blog-heading">
+        <span> Your Skincare Fairymother</span>
+        <h3> Skin blogs</h3>
+    </div>
+</section>
+
+    <div class="blog-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <img src="{% static "image/Skincare.JPG"%}"  alt="">
+                <br>
+                <br>
+                <h3> Hyperpigmentation Diary</h3>
+            </div>
+            <div class="col-3">
+                <img src="{% static "image/Skincare.JPG"%}"  alt="">
+                <br>
+                <br>
+                <h3> Hydrated babe</h3>
+            </div>
+            <div class="col-3">
+                <img src="{% static "image/Skincare.JPG"%}"  alt="">
+                <br>
+                <br>
+                <h3> Sunscreen importance</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends "skincare/about.html" %}
+
+{%load static%}
+{% block content %}
+<body class="card-pay">
+
+<div class="card-pay-container">
+    <form action="">
+        {% csrf_token %}
+        <div class="inputBox">
+            <span> Card Number</span>
+            <input type="text" maxlength="16" class="card-number-input">
+        </div>
+        <div class="inputBox">
+            <span> Card Holder</span>
+            <input type="text"  class="card-holder-input">
+        </div>
+        <div class="flexbox">
+            <div class="inputBox">
+                <span>expiration mm</span>
+                <select name="" id="month" class="month-input">
+                    <option value="month" selected disabled> month </option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <div class="inputBox">
+                <span>expiration yy</span>
+                <select name="" id="" class="year-input">
+                    <option value="month" selected disabled> year </option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
+            </div>
+            <div class="inputBox">
+                <span>cvv</span>
+                <input type="text" maxlength="4" class="cvv-input">
+            </div>
+        </div>
+        <div class="options">
+            <div class="row">
+            <div class="col-2">
+                <button type="submit" class="submit-btn" onclick="window.location.href='{% url "payment" payment_option='mpesa' %}'">Submit Payment</button>
+                </div>
+                <div class="col-2" >
+        <input type="close" value="close" class="close-btn">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+<div class="col-md 12 mb-4">
+    <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-muted"> Your cart</span>
+        <span class="badge badge-secondary badge-pill"> {{ order.items.count }}</span>
+    </h4>
+<ul class="list-group nb-3 z-depth-1">
+    {% for order_item in order.items.all %}
+    <li class="list-group-item d-flex justify-content-between th-condensed">
+        <div >
+            <h6 class="my-8"> {{order_item.number_of_Products}}*{{ order_item.item.tittle }} </h6>
+            <small class="text-muted"> {{ order_item.item.brief_description }} </small>
+        </div>
+        <span> {{order_item.final_price }}</span>
+    </li>
+    {% endfor %}
+    <li class="list-group-item d-flex justify-content-between bg-light">
+        <div class="text-success">
+            <h6 class="my-0"> Promo Code </h6>
+            <small> Examplecode</small>
+        </div>
+        <span class="text-success"> Kshs </span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between">
+        <span> total </span>
+        <strong> </strong>
+    </li>
+</ul>
+</div>
+
+{% endblock %}
+<script src="https://js.stripe.com/v3/"></script>
+<script nonce="">  // Create a Stripe client.
+  var stripe = Stripe('{{STRIPE_TEST_KEY}}');
+
+  // Create an instance of Elements.
+  var elements = stripe.elements();
+
+  // Custom styling can be passed to options when creating an Element.
+  // (Note that this demo uses a wider set of styles than the guide below.)
+  var style = {
+    base: {
+      color: '#32325d',
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '16px',
+      '::placeholder': {
+        color: '#aab7c4'
+      }
+    },
+    invalid: {
+      color: '#fa755a',
+      iconColor: '#fa755a'
+    }
+  };
+
+  // Create an instance of the card Element.
+  var card = elements.create('card', {style: style});
+
+  // Add an instance of the card Element into the `card-element` <div>.
+  card.mount('#card-element');
+
+  // Handle real-time validation errors from the card Element.
+  card.addEventListener('change', function(event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+      displayError.textContent = event.error.message;
+    } else {
+      displayError.textContent = '';
+    }
+  });
+
+  // Handle form submission.
+  var form = document.getElementById('stripe-form');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    stripe.createToken(card).then(function(result) {
+      if (result.error) {
+        // Inform the user if there was an error.
+        var errorElement = document.getElementById('card-errors');
+        errorElement.textContent = result.error.message;
+      } else {
+        // Send the token to your server.
+        stripeTokenHandler(result.token);
+      }
+    });
+  });
+
+  // Submit the form with the token ID.
+  function stripeTokenHandler(token) {
+    // Insert the token ID into the form so it gets submitted to the server
+    var form = document.getElementById('stripe-form');
+    var hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'stripeToken');
+    hiddenInput.setAttribute('value', token.id);
+    form.appendChild(hiddenInput);
+
+    // Submit the form
+    form.submit();
+  }
+
+  var currentCardForm = $('.current-card-form');
+  var newCardForm = $('.new-card-form');
+  var use_default_card = document.querySelector("input[name=use_default_card]");
+  use_default_card.addEventListener('change', function() {
+    if (this.checked) {
+      newCardForm.hide();
+      currentCardForm.show()
+    } else {
+      newCardForm.show();
+      currentCardForm.hide()
+    }
+  })
+
+</script>

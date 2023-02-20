@@ -1,0 +1,88 @@
+<style>
+         #logo{
+         }
+         body{
+         background-color: #ebeffs;
+         }
+         #total-orders{
+         background-color: #4cb4c7;
+         }
+         #orders-delivered{
+         background-color: #7abecc;
+         }
+         #orders-pending{
+         background-color: #7CD1C0
+         }
+     </style>
+
+     <section  id="blog">
+<div class="blog-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <h1> My blog </h1>
+                <img src="{% static "image/Skincare.JPG"%}"  alt="">
+            </div>
+            <div class="col-3">
+                <img src="{% static "image/Skincare.JPG"%}"  alt="">
+            </div>
+            <div class="col-3">
+                <img src="{% static "image/Skincare.JPG"%}"  alt="">
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+
+
+
+
+
+
+
+</div>
+             <div class="col-4">
+                 <img src="{% static "image/apieu.jpg"%}">
+                 <h4> Apieu Sunscreen </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                 </div>
+                 <p> Ksh 1,900</p>
+             </div>
+             <div class="col-4">
+                 <img src="{% static "image/snail.jpg"%}">
+                 <h4> Corsx snail mucin </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fa fa-star" ></i>
+                 </div>
+                 <p> Ksh 3,000</p>
+             </div>
+             <div class="col-4">
+                 <img src="{% static "image/sunblock.jpg"%}">
+                 <h4> Bondi Sands Sunscreen </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fa fa-star-half-o" ></i>
+                 </div>
+                 <p> Ksh 2,200</p>
+
+
+
+
+                 '''path('blog/', include('Skinhub.urls')),
+    path('shop/', include('Skinhub.urls')),
+    path('about/', include("Skinhub.urls")),
+    path("cart/", include("Skinhub.urls")),
+    path("accounts/", include("Skinhub.urls")),'''
