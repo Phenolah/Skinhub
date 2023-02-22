@@ -264,3 +264,23 @@ class PaymentView(View):
             #send an email to ourselves
             messages.error(self.request, "A serious error occurred. We have been notified")
             return redirect("/")
+def get_coupon(request, code):
+    try:
+        coupon = DiscountCode.objects.get(code=code)
+
+        return coupon
+    except ObjectDoesNotExist:
+        messages.info(request, "This coupon does not exist")
+        return redirect("checkout")
+
+def add_coupon(request, code):
+    try:
+        order = Order.objects.get(customer=request.user, ordered=False)
+        order.discount_coupon = get_coupon(request, code)
+        order.save()
+        messages.success(request, 'Successfully added coupon')
+        return redirect('checkout')
+
+    except ObjectDoesNotExist:
+        messages.info(request, "You do not have an active order")
+        return redirect('checkout')        
