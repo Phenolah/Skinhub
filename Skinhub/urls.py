@@ -19,7 +19,8 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path("remove-single-item-from-cart/<slug>/", views.remove_single_item_from_cart , name="remove-single-item-from-cart"),
     path('checkout/', views.CheckoutView.as_view(), name="checkout"),
-    path('payment/<payment_option>', views.PaymentView.as_view(), name='payment')
+    path('payment/<payment_option>', views.PaymentView.as_view(), name='payment'),
+    path('coupon/<code>', views.add_coupon, name="coupon")
 
 
 ]
