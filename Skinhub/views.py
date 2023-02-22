@@ -227,6 +227,9 @@ class PaymentView(View):
             payment.customer = self.request.user
             payment.amount = order.get_total()
             payment.save()
+            
+            order_items = order.items.all()
+            order_items.update(ordered=True)
 
             # assign payment to the order
             order.ordered = True
