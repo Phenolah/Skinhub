@@ -67,6 +67,13 @@ class Payment(models.Model):
     def __str__(self):
         return str(self.customer)
 
+class DiscountCode(models.Model):
+    code = models.CharField(max_length=16)
+
+    def __str__(self):
+        return self.code
+    
+
 class Order(models.Model):
     STATUS =(
         ("Out of Stock", "Out of Stock"),
@@ -80,6 +87,7 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
     status = models.CharField(max_length=30, choices=STATUS, null=True)
     payment = models.ForeignKey('Payment', null=True,on_delete=models.SET_NULL, blank=True )
+     discount_coupon = models.ForeignKey(DiscountCode,on_delete=models.SET_NULL, blank=True, null=True )
 
     def __str__(self):
         return str(self.customer)
