@@ -230,6 +230,8 @@ class PaymentView(View):
             
             order_items = order.items.all()
             order_items.update(ordered=True)
+            for item in order_items:
+                item.save()
 
             # assign payment to the order
             order.ordered = True
