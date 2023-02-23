@@ -50,7 +50,7 @@
         <div class="options">
             <div class="row">
             <div class="col-2">
-                <button type="submit" class="submit-btn" onclick="window.location.href='{% url "payment" payment_option='mpesa' %}'">Submit Payment</button>
+                <button type="submit" class="submit-btn" onclick="window.location.href='{% url "payment" payment_option %}'">Submit Payment</button>
                 </div>
                 <div class="col-2" >
         <input type="close" value="close" class="close-btn">
@@ -62,74 +62,8 @@
 </body>
 
 <div class="col-md 12 mb-4">
-    <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted"> Your cart</span>
-        <span class="badge badge-secondary badge-pill"> {{ order.items.count }}</span>
-    </h4>
-<ul class="list-group nb-3 z-depth-1">
-    {% for order_item in order.items.all %}
-    <li class="list-group-item d-flex justify-content-between th-condensed">
-        <div >
-            <h6 class="my-8"> {{order_item.number_of_Products}}*{{ order_item.item.tittle }} </h6>
-            <small class="text-muted"> {{ order_item.item.brief_description }} </small>
-        </div>
-        <span> {{order_item.final_price }}</span>
-    </li>
-    {% endfor %}
-    <li class="list-group-item d-flex justify-content-between bg-light">
-        <div class="text-success">
-            <h6 class="my-0"> Promo Code </h6>
-            <small> Examplecode</small>
-        </div>
-        <span class="text-success"> Kshs </span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between">
-        <span> total </span>
-        <strong> </strong>
-    </li>
-</ul>
+   {% include 'skincare/order_fragment.html' %}
 </div>
-<div class="col-md 12 mb-4">
-    <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted"> Your cart</span>
-        <span class="badge badge-secondary badge-pill"> {{ order.items.count }}</span>
-    </h4>
-<ul class="list-group nb-3 z-depth-1">
-    {% for order_item in order.items.all %}
-    <li class="list-group-item d-flex justify-content-between th-condensed">
-        <div >
-            <h6 class="my-8"> {{order_item.number_of_Products}}*{{ order_item.item.tittle }} </h6>
-            <small class="text-muted"> {{ order_item.item.brief_description }} </small>
-        </div>
-        <span> {{order_item.final_price }}</span>
-    </li>
-    {% endfor %}
-    <li class="list-group-item d-flex justify-content-between bg-light">
-        <div class="text-success">
-            <h6 class="my-0"> Discount Code </h6>
-            <small> Example code</small>
-        </div>
-        <span class="text-success"> Kshs </span>
-    </li>
-    <li class="list-group-item d-flex justify-content-between">
-        <span> total </span>
-        <strong> </strong>
-    </li>
-</ul>
-    <form >
-    {% csrf_token%}
-        <div class="row">
-           <div class="col-md 12 mb-2">
-               <input value="discount code" type="text" placeholder="Discount Code">
-           </div>
-            <div class="col-md 12 mb-2">
-               <button>Redeem Code</button>
-           </div>
-        </div>
-</form>
-</div>
-
-
 
 {% endblock %}
 <script src="https://js.stripe.com/v3/"></script>
