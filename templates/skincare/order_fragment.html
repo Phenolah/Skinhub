@@ -1,4 +1,3 @@
-
 <div class="col-md-12 mb-4">
     <h4 class="d-flex justify-content-between align-items-center mb-3">
     <span class="text-muted">Your cart</span>
@@ -11,29 +10,30 @@
         <h6 class="my-0">{{ order_item.number_of_Products }} x {{ order_item.item.tittle}}</h6>
         <small class="text-muted">{{ order_item.item.brief_description}}</small>
         </div>
-        <span class="text-muted">${{ order_item.get_final_price }}</span>
+        <span class="text-muted"> Kshs {{ order_item.item.price }}</span>
     </li>
     {% endfor %}
-
     <li class="list-group-item d-flex justify-content-between bg-light">
         <div class="text-success">
-        <h6 class="my-0">Promo code</h6>
-        <small></small>
+        <h6 class="my-0">Discount Code</h6>
+        <small> {{ order.discount_coupon.code}}</small>
         </div>
-        <span class="text-success">-$</span>
+        <span class="text-success"> {{ order.discount_coupon.amount}}</span>
     </li>
 
+
     <li class="list-group-item d-flex justify-content-between">
-        <span>Total (USD)</span>
-        <strong>$</strong>
+        <span>Total (KSHS)</span>
+        <strong>{{order.get_total}}</strong>
     </li>
     </ul>
 
 
-    <form class="card p-2" action="" method="POST">
+
+    <form class="card p-2" action="{% url 'add-coupon' %}" method="POST">
         {% csrf_token %}
         <div class="input-group">
-
+                {{couponform.code}}
             <div class="input-group-append">
             <button class="btn btn-secondary btn-md waves-effect m-0" type="submit">Redeem</button>
             </div>
