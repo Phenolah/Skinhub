@@ -42,9 +42,23 @@ class OrderItem(models.Model):
     def __str__(self):
         #return f"{self.number_of_Products} of {self.item.tittle}"
         return str(self.number_of_Products) + " of " + str(self.item.tittle)
+    #def total_item_price(self):
+        #total = int(self.number_of_Products) * int(self.item.price)
+        #return total
     def total_item_price(self):
-        total = int(self.number_of_Products) * int(self.item.price)
+        try:
+            num_products = int(self.number_of_Products)
+        except ValueError:
+            num_products = 0
+
+        try:
+            item_price = float(self.item.price)
+        except ValueError:
+            item_price = 0.0
+
+        total = num_products * item_price
         return total
+
     def discount_total_price(self):
         total = int(self.number_of_Products) * int(self.item.discount_price)
         return total
@@ -69,10 +83,11 @@ class Payment(models.Model):
 
 class DiscountCode(models.Model):
     code = models.CharField(max_length=16)
-
+    amount = models.FloatField(default=0.0)
     def __str__(self):
         return self.code
-    
+
+
 
 class Order(models.Model):
     STATUS =(
@@ -81,13 +96,18 @@ class Order(models.Model):
         ("Delivered", "Delivered"),
     )
     customer = models.ForeignKey(User, max_length=100, null=True,on_delete=models.CASCADE )
+    ref_code = models.CharField(max_length=20, null=True, blank=True)
     items = models.ManyToManyField(OrderItem)
     start_date = models.DateTimeField(auto_now_add=True, null=True)
     ordered_date = models.DateTimeField(auto_now_add=True, null=True)
     ordered = models.BooleanField(default=False)
     status = models.CharField(max_length=30, choices=STATUS, null=True)
     payment = models.ForeignKey('Payment', null=True,on_delete=models.SET_NULL, blank=True )
-     discount_coupon = models.ForeignKey(DiscountCode,on_delete=models.SET_NULL, blank=True, null=True )
+    discount_coupon = models.ForeignKey(DiscountCode,on_delete=models.SET_NULL, blank=True, null=True )
+    being_delivered = models.BooleanField(default=False)
+    received = models.BooleanField(default=False)
+    refund_requested = models.BooleanField(default=False)
+    refund_granted = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.customer)
@@ -96,8 +116,17 @@ class Order(models.Model):
         order_item = self.items.all()
         for i in order_item:
             total += i.final_price()
+        if self.discount_coupon:
+            total -= int(self.discount_coupon.amount)
         return total
+class Refund(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    reason = models.TextField()
+    accepted = models.BooleanField(default=False)
+    email = models.EmailField()
 
+    def __str__(self):
+        return f"{self.pk}"
 
 
 
