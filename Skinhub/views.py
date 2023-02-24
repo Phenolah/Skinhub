@@ -13,11 +13,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.conf import settings
 import stripe
 from stripe.error import APIConnectionError
-import logging
+import string
+import random
 stripe.api_key = settings.STRIPE_TEST_KEY
 
 
 # Create your views here.
+
+def random_ref_code():
+    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
+
 class HomeView(ListView):
     template_name = "skincare/main.html"
     context_object_name = 'items'
@@ -75,11 +80,11 @@ def add_to_cart(request,slug):
             order_item.number_of_Products += 1
             order_item.save()
             messages.info(request, "This item quantity was updated")
-            return redirect("details", slug=slug)
+            return redirect("order_summary")
         else:
             messages.info(request, "This item has been added to your cart")
             order.items.add(order_item)
-            return redirect("details", slug=slug)
+            return redirect("order_summary")
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(customer=request.user, ordered_date=ordered_date)
@@ -161,13 +166,22 @@ def accounts(request):
 def login(request):
     return render(request, "registration/login.html")
 
+
 class CheckoutView(View):
     def get(self, *args, **kwargs):
-        form = CheckoutForm()
-        context = {
-            'form': form
-        }
-        return render(self.request, "skincare/checkout.html", context)
+        try:
+            order = Order.objects.get(customer=self.request.user, ordered=False)
+            form = CheckoutForm()
+            Couponform = CouponForm()
+            context = {
+                'form': form,
+                'order': order,
+                'couponform' : Couponform
+            }
+            return render(self.request, 'skincare/checkout.html', context)
+        except ObjectDoesNotExist:
+            messages.info(self.request, "You do not have an order")
+            return redirect("checkout")
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
         try:
@@ -177,24 +191,35 @@ class CheckoutView(View):
                 payment_method = form.cleaned_data.get('payment_option')
                 phone = form.cleaned_data.get('phone')
                 email = form.cleaned_data.get('email')
+                payment_option = form.cleaned_data.get('payment_option')
 
 
                 order.save()
                 messages.info(self.request, "Payment Submitted successfullly")
-                return redirect("checkout")
+                if payment_option == 'M':
+                    return redirect('payment', payment_option='Mpesa')
+                elif payment_option == 'D':
+                    return redirect('payment', payment_option='Debit card')
+                elif payment_option == 'C':
+                    return redirect('payment', payment_option='Credit card')
+                elif payment_option == 'P':
+                    return redirect('payment', payment_option='Paypal')
+                else:
+                    messages.warning(self.request, "Invalid payment option")
+                    return redirect('checkout')
             else:
                 for field in form:
                     for error in field.errors:
                         messages.warning(self.request, f"{field.label}: {error}")
                 return redirect("checkout")
             if payment_option == 'M':
-                return redirect('payment', payment_option='mpesa')
+                return redirect('payment', payment_option='Mpesa')
             elif payment_option == 'D':
-                return redirect('payment', payment_option='debit card')
+                return redirect('payment', payment_option='Debit card')
             elif payment_option == 'C':
-                return redirect('payment', payment_option='credit card')
+                return redirect('payment', payment_option='Credit card')
             elif payment_option == 'P':
-                return redirect('payment', payment_option='paypal')
+                return redirect('payment', payment_option='Paypal')
             else:
                 messages.warning(self.request, "Invalid payment option")
                 return redirect('checkout')
@@ -206,9 +231,14 @@ class CheckoutView(View):
 class PaymentView(View):
     def get(self, *args, **kwargs):
         order = Order.objects.get(customer=self.request.user, ordered=False)
+        form = CheckoutForm()
+        Couponform = CouponForm()
         context = {
+            'form': form,
             'order': order,
+            'couponform': Couponform
         }
+
         return render(self.request, "skincare/payment.html", context)
     def post(self, *args, **kwargs):
         order = Order.objects.get(customer=self.request.user, ordered=False)
@@ -227,15 +257,16 @@ class PaymentView(View):
             payment.customer = self.request.user
             payment.amount = order.get_total()
             payment.save()
-            
+
+            # assign payment to the order
             order_items = order.items.all()
             order_items.update(ordered=True)
             for item in order_items:
                 item.save()
 
-            # assign payment to the order
             order.ordered = True
             order.payment = payment
+            order.ref_code = random_ref_code()
             order.save()
             messages.success(self.request, "Your order was successful")
             return redirect("/")
@@ -278,14 +309,51 @@ def get_coupon(request, code):
         messages.info(request, "This coupon does not exist")
         return redirect("checkout")
 
-def add_coupon(request, code):
-    try:
-        order = Order.objects.get(customer=request.user, ordered=False)
-        order.discount_coupon = get_coupon(request, code)
-        order.save()
-        messages.success(request, 'Successfully added coupon')
-        return redirect('checkout')
+class AddCouponView(View):
+    def post(self, *args, **kwargs):
+        form = CouponForm(self.request.POST or None)
+        if form.is_valid():
+            try:
+                code = form.cleaned_data.get('code')
+                order = Order.objects.get(customer=self.request.user, ordered=False)
+                order.discount_coupon = get_coupon(self.request, code)
+                order.save()
+                messages.success(self.request, 'Successfully added coupon')
+                return redirect('checkout')
+            except ObjectDoesNotExist:
+                messages.info(self.request, "You do not have an active order")
+                return redirect('checkout')
 
-    except ObjectDoesNotExist:
-        messages.info(request, "You do not have an active order")
-        return redirect('checkout')        
+class RequestRefundView(View):
+    def get(self, *arg, **kwargs):
+        form = RefundForm
+        context = {
+            'form': form
+        }
+
+        return render(self.request, 'skincare/refund.html', context)
+    def post(self, *args, **kwargs):
+        form = RefundForm(self.request.POST)
+        if form.is_valid():
+            ref_code = form.cleaned_data.get('ref_code')
+            message = form.cleaned_data.get('message')
+            email = form.cleaned_data.get('email')
+            try:
+                order = Order.objects.get(ref_code=ref_code)
+                order.refund_requested = True
+                order.save()
+
+                refund = Refund()
+                refund.order = order
+                refund.reason = message
+                refund.email = email
+                refund.save()
+                messages.info(self.request, 'Your request has been received')
+                return redirect('home')
+
+            except ObjectDoesNotExist:
+                message.info(self.request, 'Order doesn\'t exist')
+                return redirect('home')
+
+
+
