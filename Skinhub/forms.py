@@ -95,6 +95,23 @@ class CheckoutForm(forms.Form):
         'name': 'email',
         'class': 'form-control'
     }))
+    class CouponForm(forms.Form):
+    code = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Discount Code',
+
+    }))
+
+class RefundForm(forms.Form):
+    ref_code = forms.CharField()
+    message = forms.CharField(widget=forms.Textarea(attrs={
+        'rows' : 5,
+        'class': 'form-control'
+
+    }))
+    email = forms.EmailField()
+
+
 
 
 
