@@ -161,7 +161,7 @@ def details(request, slug=None):
     return render(request, template, context)
 
 def accounts(request):
-    return render(request, "skincare/accounts.html")
+    return render(request, "registration/accounts.html")
 
 def login(request):
     return render(request, "registration/login.html")
