@@ -1,5 +1,6 @@
 {% extends "skincare/about.html" %}
 {%load static%}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="account-page">
    <div class="container">
@@ -10,23 +11,20 @@
            <div class="col-2">
                <div class="form-container">
                    <div class="form-btn">
-                       <span  onclick="Login()">login</span>
+                       <span  onclick="Login()"> Registration </span>
                        <hr id="Indicator" width="100px">
                    </div>
 
-                   <form id="RegForm">
-                       <input type="text" placeholder="Username">
-                       <br>
-                       <br>
-                        <input type="email" placeholder="Email">
-                       <br>
-                       <br>
-                       <input type="Password" placeholder="Password">
-                       <br>
-                       <br>
-                       <button type="submit" class="btn">Register</button>
+                   <form id="RegForm" action="" method="POST" >
+                       {% csrf_token %}
 
-
+                       {{form|crispy}}
+                      <div class="sign-btn">
+                      <button>Sign up </button>
+                      </div>
+                      <div>
+                      <small> Already have an account <a href="url 'login' "> Sign in</a> </small>
+                      </div>
                    </form>
 
                </div>
@@ -34,5 +32,6 @@
        </div>
    </div>
 </div>
+
 
 {% endblock %}
