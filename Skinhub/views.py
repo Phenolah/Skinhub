@@ -15,6 +15,7 @@ import stripe
 from stripe.error import APIConnectionError
 import string
 import random
+from django.contrib.auth.forms import UserCreationForm
 stripe.api_key = settings.STRIPE_TEST_KEY
 
 
@@ -161,6 +162,7 @@ def details(request, slug=None):
     return render(request, template, context)
 
 def accounts(request):
+    context={}
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
