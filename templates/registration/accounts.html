@@ -18,7 +18,13 @@
                    <form id="RegForm" action="" method="POST" >
                        {% csrf_token %}
 
-                       {{form|crispy}}
+                       {% for field in form %}
+                       {{field.label}}
+                       {{field}}
+                       <br>
+                       <br>
+                       {% endfor %}
+                       {{form.errors}}
                       <div class="sign-btn">
                       <button>Sign up </button>
                       </div>
