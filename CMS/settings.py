@@ -176,8 +176,10 @@ REST_FRAMEWORK = {
         'rest-framework.authentication.TokenAuthentication',
     ]
 }
-
-LOGIN_URL='login/'
-
+LOGIN_REDIRECT_URL= 'home'
+LOGIN_URL = '/login/'
 STRIPE_TEST_KEY = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
