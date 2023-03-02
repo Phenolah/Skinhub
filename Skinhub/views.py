@@ -162,25 +162,48 @@ def details(request, slug=None):
     return render(request, template, context)
 
 def accounts(request):
-    context={}
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Hi {username}, your account has  been successfully created')
-
-            return redirect('home')
+    context = {}
+    if request.user.is_authenticated:
+        return redirect ('home')
     else:
-        form = UserCreationForm()
-        context = {
-            'form': form
-        }
+        if request.method == 'POST':
+            form = UserRegistrationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                messages.success(request, f'Hi {username}, your account has  been successfully created')
+                return redirect('login')
+        else:
+            form = UserRegistrationForm()
+            context = {
+                'form': form
+            }
 
-    return render(request, "registration/accounts.html", context)
+        return render(request, "registration/accounts.html", context)
 
 def login(request):
-    return render(request, "registration/login.html")
+    form = UserRegistrationForm(request.POST)
+    context = {
+        'form': form
+    }
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                return redirect('home')
+        return render(request, "registration/login.html", context)
+
+
+def logout(request):
+    return render(request, "registration/logout.html")
 
 
 class CheckoutView(View):
