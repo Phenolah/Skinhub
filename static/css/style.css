@@ -790,7 +790,13 @@ h5 {
   text-align: right;
   width: 30%;
 }
-
+.hello-msg{
+   color: brown;
+   font-size: 13.5px;
+}
+.body{
+   background: radial-gradient(#fff, #F2D2BD);
+}
 
 
 
