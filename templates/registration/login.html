@@ -17,12 +17,13 @@
 
                    <form id="RegForm">
                        {% csrf_token %}
-                       <input type="text" placeholder="Username">
+                       {% for field in form %}
+                       {{field.label}}
+                       {{field}}
                        <br>
                        <br>
-                       <input type="Password" placeholder="Password">
-                       <br>
-                       <br>
+                       {% endfor %}
+                       {{form.errors}}
                        <button type="submit" class="btn">Login</button>
                        <a href=""> Forgot password?</a>
 
