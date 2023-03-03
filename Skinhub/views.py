@@ -54,6 +54,7 @@ class ShopView(ListView):
 def about(request):
     return render(request, "skincare/about.html")
 
+@login_required(login_url='login')
 class OrderSummary(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
@@ -66,7 +67,7 @@ class OrderSummary(LoginRequiredMixin, View):
             messages.error(self.request, "Order does not exist")
             return redirect("/")
 
-@login_required
+@login_required(login_url='login')
 def add_to_cart(request,slug):
     item = Item.objects.get(slug=slug)
     order_item,created = OrderItem.objects.get_or_create(
@@ -94,6 +95,7 @@ def add_to_cart(request,slug):
 
     return redirect("details",slug=slug)
 
+@login_required(login_url='login')
 def remove_from_cart(request,slug):
     item = get_object_or_404(Item, slug=slug)
     order_qs = Order.objects.filter(
@@ -120,7 +122,7 @@ def remove_from_cart(request,slug):
         return redirect("details", slug=slug)
     return redirect("details", slug=slug)
 
-@login_required
+@login_required(login_url='login')
 def remove_single_item_from_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
     cart_qs = Order.objects.filter(
@@ -267,6 +269,7 @@ class CheckoutView(View):
             messages.error(self.request, "You do not have an active order")
             return redirect("checkout")
 
+@login_required(login_url='login')
 class PaymentView(View):
     def get(self, *args, **kwargs):
         order = Order.objects.get(customer=self.request.user, ordered=False)
@@ -339,6 +342,8 @@ class PaymentView(View):
             #send an email to ourselves
             messages.error(self.request, "A serious error occurred. We have been notified")
             return redirect("/")
+        
+@login_required(login_url='login')        
 def get_coupon(request, code):
     try:
         coupon = DiscountCode.objects.get(code=code)
@@ -348,6 +353,7 @@ def get_coupon(request, code):
         messages.info(request, "This coupon does not exist")
         return redirect("checkout")
 
+@login_required(login_url='login')
 class AddCouponView(View):
     def post(self, *args, **kwargs):
         form = CouponForm(self.request.POST or None)
@@ -362,7 +368,8 @@ class AddCouponView(View):
             except ObjectDoesNotExist:
                 messages.info(self.request, "You do not have an active order")
                 return redirect('checkout')
-
+            
+@login_required(login_url='login')
 class RequestRefundView(View):
     def get(self, *arg, **kwargs):
         form = RefundForm
