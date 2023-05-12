@@ -50,6 +50,18 @@
           <a href=" {% url 'accounts' %}"  > <img src="{% static "/image/shoppingbag.png"%}" width="30px" height="30px"> </a>
              {% else %}
              <a href="{%url 'accounts' %}">
+        
+             </a>
+             {% endif %}
+
+             {% if request.customer.is_authenticated %}
+
+             <a href="{% url "order_summary" %}"  class="nav-link">
+                 <span class="badge">{{ request.customer|get_cart_count}}</span>
+                <img src="{% static '/image/shoppingbag.png' %}" width="30px" height="30px">
+             </a>
+             {% else %}
+             <a href="{% url "order_summary" %}">
                 <img src="{% static '/image/shoppingbag.png' %}" width="30px" height="30px">
              </a>
              {% endif %}
