@@ -18,18 +18,16 @@
 
 
 </head>
-
-
-<body>
+<body class="body">
 {% if messages %}
 {% for message in messages %}
-<div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+<div class="alert alert={{ message.tags}}" >
+  <span class="closebtn " onclick="this.parentElement.style.display='none';">&times;</span>
   {{message}}
 </div>
 {% endfor %}
 {% endif %}
-    <span class="hello-msg"> Hello {{user.username}}</span>
+<span class="hello-msg"> Hello {{user.username}}</span>
 
     <link rel="stylesheet" href="{% static "/css/style.css"%}">
     <div class="header">
@@ -49,9 +47,9 @@
              </ul>
              {% if request.customer.is_authenticated %}
              {{ request.customer|get_cart_count }}
-          <a href=" {% url 'order_summary' %}"  > <img src="{% static "/image/shoppingbag.png"%}" width="30px" height="30px"> </a>
+          <a href=" {% url 'accounts' %}"  > <img src="{% static "/image/shoppingbag.png"%}" width="30px" height="30px"> </a>
              {% else %}
-             <a href="{%url 'order_summary' %}">
+             <a href="{%url 'accounts' %}">
                 <img src="{% static '/image/shoppingbag.png' %}" width="30px" height="30px">
              </a>
              {% endif %}
@@ -66,7 +64,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-2">
-                    <img src="{% static "image/Skincare.JPG"%}" width="500px" alt="no image">
+                    <img src="{% static "image/Skincare.JPG"%}" turn co alt="no image">
                 </div>
                 <div class="col-2">
                     <h1 >Only Healthy Skin Days Ahead</h1>
@@ -114,7 +112,7 @@
 
                  </div>
                  <div class="footer-col-2">
-                     <h3> Skin HUB</h3>
+                     <h3> Skin Hub</h3>
                      <p> Your favourite skincare shop helping<br>
                          you achieve healthy skin on a budget</p>
                  </div>
@@ -139,11 +137,10 @@
                  </div>
              </div>
              <hr>
-             <p class="copyright">  Copyright 2022 -SkinHub</p>
+             <p class="copyright">  Copyright @ {% now 'Y' %} -SkinHub All Rights Reserved</p>
          </div>
      </div>
 
 
 </body>
 </html>
-
