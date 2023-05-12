@@ -503,8 +503,11 @@ form a{
           object-position: center;
 }
 .products {
-          background: #ffffff
+          background: #ffffff;
+          margin-bottom: 20px;
+          margin-top: 20px;
 }
+
 .products .col-5{
         text-align: center ;
         padding: 40px 20px;
