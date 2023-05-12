@@ -1,1 +1,340 @@
-{%load static%}{% load cart_template_tags %}<html lang="en"><head>    <meta charset="UTF-8">    <link rel="stylesheet" type="text/css" href="{% static "/css/style.css"%}">    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css">    <link  rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,600&display=swap">    <!-----Copy this CDN LINK-->      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />    <link rel="stylesheet" href="{% static "/css/style.css"%}">    <script src="https://js.stripe.com/v3/"></script></head><body>    <link rel="stylesheet" href="{% static "/css/style.css"%}">    <div class="header">     <div class="container">         <div class="navbar">         <div class="logo">             <img  src="{% static "image/logoicon1.png" %}" alt="no image found">         </div>         <nav>             <ul>                 <li> <a href="{% url "home" %}">Home</a></li>                 <li> <a href="{%url "shop" %}">Shop</a></li>                 <li> <a href="{% url "about" %}">About</a></li>                 <li> <a href="{% url "blog" %}">Blog</a></li>                 <li> <a href="{% url "accounts" %}">Account</a></li>             </ul>         </nav>             {% if request.customer.is_authenticated %}             <a href="{% url "order_summary" %}"  class="nav-link">                 <span class="badge">{{ request.customer|get_cart_count}}</span>                <img src="{% static '/image/shoppingbag.png' %}" width="30px" height="30px">             </a>             {% else %}             <a href="{% url "order_summary" %}">                <img src="{% static '/image/shoppingbag.png' %}" width="30px" height="30px">             </a>             {% endif %}         </div>         <div class="row">             <div class="col-2">                 <h1> Your number 1 stop <br> for skincare needs </h1>                 <p> Skincare is a personal journey and we are going                     to<br> be with you through every step until you achieve healthy skin.</p><br>                 <a class="btn" href=""> Shop Now</a>             </div>             <div class="col-2">                 <img  src="{% static "/image/skincare.JPG" %}" alt="no image found">             </div>         </div>     </div>     </div>    <! featured categories >     <div class="categories">         <div class="tiny-container">             <div class="row">             <div class="col-3">                 <img  src="{% static "image/toner.jpg" %}" alt="no image found">             </div>             <div class="col-3">                 <img src="{% static "image/vitaminc.jpg" %}">             </div>             <div class="col-3">                 <img src="{% static "image/aloe.jpg"%}">             </div>         </div>     </div>     </div>     <div class="little-container">        <h2 class="tittle">Popular Skincare Products </h2>         <div class="row">             <div class="col-4">                 <img src="{% static "image/ulta.jpg"%}">                 <h4> Oil-Free Moisturizing </h4>                 <div class="rating">                     <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                     <i class="fas fa-star"></i>                 </div>                 <p> Ksh 2,500</p>             </div>             <div class="col-4">                 <img src="{% static "image/apieu.jpg"%}">                 <h4> Apieu Sunscreen </h4>                 <div class="rating">                     <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fa fa-star-half-o"></i>                 </div>                 <p> Ksh 1,900</p>             </div>             <div class="col-4">                 <img src="{% static "image/snail.jpg"%}">                 <h4> Corsx snail mucin </h4>                 <div class="rating">                     <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fa fa-star" ></i>                 </div>                 <p> Ksh 3,000</p>             </div>             <div class="col-4">                 <img src="{% static "image/sunblock.jpg"%}">                 <h4> Bondi Sands Sunscreen </h4>                 <div class="rating">                     <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fa fa-star-half-o" ></i>                 </div>                 <p> Ksh 2,200</p>             </div>         </div>         <h2 class="tittle"> Dynamic Skincare Duos</h2>         <div class="row">             <div class="col-4">                 <img src="{% static "image/naturium.jpg"%}">                 <h4> Naturium Package </h4>                 <div class="rating">                     <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                     <i class="fas fa-star"></i>                 </div>                 <p> Ksh 8,000</p>             </div>             <div class="col-4">                 <img src="{% static "image/haruharu.jpg"%}">                 <h4> Haruharu Package </h4>                 <div class="rating">                     <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fa fa-star-half-o"></i>                 </div>                 <p> Ksh 4,000</p>             </div>             <div class="col-4">                 <img src="{% static "image/paula.jpg"%}">                 <h4> Paula's Choice Package </h4>                 <div class="rating">                     <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fa fa-star" ></i>                 </div>                 <p> Ksh 9,000</p>             </div>             <div class="col-4">                 <img src="{% static "image/cerave.jpg"%}">                 <h4> Cerave Package </h4>                 <div class="rating">                     <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fas fa-star"></i>                    <i class="fa fa-star-half-o" ></i>                 </div>                 <p> Ksh 10,000</p>             </div>         </div>     </div>     <div class="offer">         <div class="small container">             <div class="row">                 <div class="col-2">                     <img src="{% static "image/offer.jpg" %}"width=" 500px""alt=" no image">                 </div>                 <div class="col-2">                     <p> Get a free bottle of wine </p>                     <h1> Fig boosting essence</h1>                     <small> It's made with 62.7% Fig extract to hydrate and smoothen rough skin,                         while boosting the skin's ability to absorb the next skincare steps</small>                     <br>                     <br>                     <a href="" class="btn" >Buy Now &#8594;</a>                 </div>             </div>         </div>     </div>    <br><! ----------- Reviews -------- !>     <div class="testimonial">         <div class="pintsized-container">             <div class="row">                 <div class="col-3">                     <i class="fas fa-quote-left"></i>                     <p> The aloe vera Corsx sunscreen has been life changing for me                         especially for my hyperpigmentation. I have seen drastic                         improvement on my back heads plus its is moisturizing.</p>                     <div class="rating">                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                     </div>                     <br>                     <img src="{% static "image/red1.jpg"%}" height=" 150px" alt="no image">                     <br>                     <br>                     <h3> Naomi Kiamba</h3>                 </div>                 <div class="col-3">                     <i class="fas fa-quote-left"></i>                     <p> The lactic acid 5% from the ordinary is awesome, i love it.                         I,m pairing it hyaluronic acid from inkey list and my dark spots are                         really fading away thank you.</p>                     <div class="rating">                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                     </div>                     <br>                     <img  src="{% static "image/hot.jpg"%}" height=" 180px" alt="no image">                     <br>                     <br>                     <h3> Williams Nyree </h3>                 </div>                 <div class="col-3">                     <i class="fas fa-quote-left"></i>                     <p> The corsx snail mucin essence is magic My skin is in love with it.                         It hydrates my skin really good and gives it a glow.                         I'll be repurchasing it soon.</p>                     <div class="rating">                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                           <i class="fas fa-star"></i>                     </div>                     <img  src="{% static "image/pink.jpg"%}" height=" 200px" alt="no image">                     <br>                     <br>                     <h3> Amaria BB</h3>                 </div>             </div>         </div>     </div><!---------brands ---------->     <div class="brands">        <div class="brands-container">            <div class="row">                <div class="col-5" >                    <img src="{% static "image/ceravee.jpg"%}" height=" 50px" alt="">                </div>                <div class="col-5" >                    <img src="{% static "image/paulalogo.jpg"%}" height="50px" alt="">                </div>                <div class="col-5" >                    <img src="{% static "image/cosrx.jpg"%}" height="50px" alt="">                </div>                <div class="col-5" >                    <img src=" {% static "image/ordinary.jpg"%}" height="50px" alt="">                </div>                <div class="col-5" >                    <img src=" {% static "image/kleologo.jpg"%}" width="150px"height="50px" alt="">                </div>            </div>        </div>     </div><! ---------- footer ---------->     <div class="footer">         <div class="container">             <div class="row">                 <div class="footer-col-1">                     <h3> Download Our App</h3>                     <p> Download App for Android and ios mobile app. </p>                     <div class="app-logo">                     <img src="{% static "image/google.jpg"%}">                     <img src="{% static "image/apple.jpg"%}">                     </div>                 </div>                 <div class="footer-col-2">                     <h3> Skin HUB</h3>                     <p> Your favourite skincare shop helping<br>                         you achieve healthy skin on a budget</p>                 </div>                 <br>                 <div class="footer-col-3">                     <h3> Useful links</h3>                     <ul>                         <li > Offers </li>                         <li > Blog Post </li>                         <li> Return and Refund Policy </li>                         <li> Testimonials  </li>                     </ul>                 </div>                 <div class="footer-col-4">                     <h3> Follow us </h3>                     <ul>                         <li> Facebook</li>                         <li> Twitter </li>                         <li> Instagram </li>                         <li> Tiktok </li>                     </ul>                 </div>             </div>             <hr>             <p class="copyright">  Copyright 2022 -SkinHub</p>         </div>     </div></body></html>
+
+{%load static%}
+{% load cart_template_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" type="text/css" href="{% static "/css/style.css"%}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css">
+    <link  rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,600&display=swap">
+    <!-----Copy this CDN LINK-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static "/css/style.css"%}">
+</head>
+
+<body>
+   {% if messages %}
+{% for message in messages %}
+<div class="alert alert={{ message.tags}}" >
+  <span class="closebtn " onclick="this.parentElement.style.display='none';">&times;</span>
+  {{message}}
+</div>
+{% endfor %}
+{% endif %}
+
+    <link rel="stylesheet" href="{% static "/css/style.css"%}">
+    <div class="header">
+    <span class="hello-msg"> Hello {{user.username}}</span>
+     <div class="container">
+         <div class="navbar">
+         <div class="logo">
+             <img  src="{% static "image/logoicon1.png" %}" alt="no image found">
+         </div>
+         <nav>
+             <ul>
+                 <li> <a href="{% url "home" %}">Home</a></li>
+                 <li> <a href="{%url "shop" %}">Shop</a></li>
+                 <li> <a href="{% url "about" %}">About</a></li>
+                 <li> <a href="{% url "blog" %}">Blog</a></li>
+                 <li> <a href="{% url "accounts" %}">Account</a></li>
+             </ul>
+         </nav>
+             {% if request.customer.is_authenticated %}
+
+             <a href="{% url "order_summary" %}"  class="nav-link">
+                 <span class="badge">{{ request.customer|get_cart_count}}</span>
+                <img src="{% static '/image/shoppingbag.png' %}" width="30px" height="30px">
+             </a>
+             {% else %}
+             <a href="{% url "order_summary" %}">
+                <img src="{% static '/image/shoppingbag.png' %}" width="30px" height="30px">
+             </a>
+             {% endif %}
+
+
+
+         </div>
+         <div class="row">
+             <div class="col-2">
+                 <h1> Your number 1 stop <br> for skincare needs </h1>
+                 <p> Skincare is a personal journey and we are going
+                     to<br> be with you through every step until you achieve healthy skin.</p><br>
+                 <a class="btn" href=""> Shop Now</a>
+             </div>
+             <div class="col-2">
+                 <img  src="{% static "/image/skincare.JPG" %}" alt="no image found">
+             </div>
+         </div>
+     </div>
+     </div>
+
+    <! featured categories >
+     <div class="categories">
+         <div class="tiny-container">
+             <div class="row">
+             <div class="col-3">
+                 <img  src="{% static "image/toner.jpg" %}" alt="no image found">
+             </div>
+             <div class="col-3">
+                 <img src="{% static "image/vitaminc.jpg" %}">
+             </div>
+             <div class="col-3">
+                 <img src="{% static "image/aloe.jpg"%}">
+             </div>
+         </div>
+     </div>
+     </div>
+     <div class="little-container">
+        <h2 class="tittle">Popular Skincare Products </h2>
+
+         <div class="row">
+             <div class="col-4">
+                 <img src="{% static "image/ulta.jpg"%}">
+                 <h4> Oil-Free Moisturizing </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                 </div>
+                 <p> Ksh 2,500</p>
+             </div>
+             <div class="col-4">
+                 <img src="{% static "image/apieu.jpg"%}">
+                 <h4> Apieu Sunscreen </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                 </div>
+                 <p> Ksh 1,900</p>
+             </div>
+             <div class="col-4">
+                 <img src="{% static "image/snail.jpg"%}">
+                 <h4> Corsx snail mucin </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fa fa-star" ></i>
+                 </div>
+                 <p> Ksh 3,000</p>
+             </div>
+             <div class="col-4">
+                 <img src="{% static "image/sunblock.jpg"%}">
+                 <h4> Bondi Sands Sunscreen </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fa fa-star-half-o" ></i>
+                 </div>
+                 <p> Ksh 2,200</p>
+             </div>
+         </div>
+         <h2 class="tittle"> Dynamic Skincare Duos</h2>
+
+         <div class="row">
+             <div class="col-4">
+                 <img src="{% static "image/naturium.jpg"%}">
+                 <h4> Naturium Package </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                     <i class="fas fa-star"></i>
+                 </div>
+                 <p> Ksh 8,000</p>
+             </div>
+             <div class="col-4">
+                 <img src="{% static "image/haruharu.jpg"%}">
+                 <h4> Haruharu Package </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                 </div>
+                 <p> Ksh 4,000</p>
+             </div>
+             <div class="col-4">
+                 <img src="{% static "image/paula.jpg"%}">
+                 <h4> Paula's Choice Package </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fa fa-star" ></i>
+                 </div>
+                 <p> Ksh 9,000</p>
+             </div>
+             <div class="col-4">
+                 <img src="{% static "image/cerave.jpg"%}">
+                 <h4> Cerave Package </h4>
+                 <div class="rating">
+                     <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fa fa-star-half-o" ></i>
+                 </div>
+                 <p> Ksh 10,000</p>
+             </div>
+         </div>
+     </div>
+     <div class="offer">
+         <div class="small container">
+             <div class="row">
+                 <div class="col-2">
+                     <img src="{% static "image/offer.jpg" %}"width=" 500px""alt=" no image">
+                 </div>
+                 <div class="col-2">
+                     <p> Get a free bottle of wine </p>
+                     <h1> Fig boosting essence</h1>
+                     <small> It's made with 62.7% Fig extract to hydrate and smoothen rough skin,
+                         while boosting the skin's ability to absorb the next skincare steps</small>
+                     <br>
+                     <br>
+                     <a href="{% url 'shop'%}" class="btn" >Buy Now &#8594;</a>
+                 </div>
+
+             </div>
+         </div>
+     </div>
+    <br>
+<! ----------- Reviews -------- !>
+     <div class="testimonial">
+         <div class="pintsized-container">
+             <div class="row">
+                 <div class="col-3">
+                     <i class="fas fa-quote-left"></i>
+                     <p> The aloe vera Corsx sunscreen has been life changing for me
+                         especially for my hyperpigmentation. I have seen drastic
+                         improvement on my back heads plus its is moisturizing.</p>
+                     <div class="rating">
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                     </div>
+                     <br>
+                     <img src="{% static "image/red1.jpg"%}" height=" 150px" alt="no image">
+                     <br>
+                     <br>
+                     <h3> Naomi Kiamba</h3>
+                 </div>
+                 <div class="col-3">
+                     <i class="fas fa-quote-left"></i>
+                     <p> The lactic acid 5% from the ordinary is awesome, i love it.
+                         I,m pairing it hyaluronic acid from inkey list and my dark spots are
+                         really fading away thank you.</p>
+                     <div class="rating">
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                     </div>
+                     <br>
+                     <img  src="{% static "image/hot.jpg"%}" height=" 180px" alt="no image">
+                     <br>
+                     <br>
+                     <h3> Williams Nyree </h3>
+                 </div>
+                 <div class="col-3">
+                     <i class="fas fa-quote-left"></i>
+                     <p> The corsx snail mucin essence is magic My skin is in love with it.
+                         It hydrates my skin really good and gives it a glow.
+                         I'll be repurchasing it soon.</p>
+                     <div class="rating">
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                           <i class="fas fa-star"></i>
+                     </div>
+                     <img  src="{% static "image/pink.jpg"%}" height=" 200px" alt="no image">
+                     <br>
+                     <br>
+                     <h3> Amaria BB</h3>
+                 </div>
+             </div>
+         </div>
+     </div>
+<!---------brands ---------->
+     <div class="brands">
+        <div class="brands-container">
+            <div class="row">
+                <div class="col-5" >
+                    <img src="{% static "image/ceravee.jpg"%}" height=" 50px" alt="">
+                </div>
+                <div class="col-5" >
+                    <img src="{% static "image/paulalogo.jpg"%}" height="50px" alt="">
+                </div>
+                <div class="col-5" >
+                    <img src="{% static "image/cosrx.jpg"%}" height="50px" alt="">
+                </div>
+                <div class="col-5" >
+                    <img src=" {% static "image/ordinary.jpg"%}" height="50px" alt="">
+                </div>
+                <div class="col-5" >
+                    <img src=" {% static "image/kleologo.jpg"%}" width="150px"height="50px" alt="">
+                </div>
+            </div>
+        </div>
+     </div>
+
+<! ---------- footer ---------->
+     <div class="footer">
+         <div class="container">
+             <div class="row">
+                 <div class="footer-col-1">
+                     <h3> Download Our App</h3>
+                     <p> Download App for Android and ios mobile app. </p>
+                     <div class="app-logo">
+                     <img src="{% static "image/google.jpg"%}">
+                     <img src="{% static "image/apple.jpg"%}">
+                     </div>
+
+                 </div>
+                 <div class="footer-col-2">
+                     <h3> Skin HUB</h3>
+                     <p> Your favourite skincare shop helping<br>
+                         you achieve healthy skin on a budget</p>
+                 </div>
+                 <br>
+                 <div class="footer-col-3">
+                     <h3> Useful links</h3>
+                     <ul>
+                         <li > Offers </li>
+                         <li > Blog Post </li>
+                         <li> Return and Refund Policy </li>
+                         <li> Testimonials  </li>
+                     </ul>
+                 </div>
+                 <div class="footer-col-4">
+                     <h3> Follow us </h3>
+                     <ul>
+                         <li> Facebook</li>
+                         <li> Twitter </li>
+                         <li> Instagram </li>
+                         <li> Tiktok </li>
+                     </ul>
+                 </div>
+             </div>
+             <hr>
+             <p class="copyright">  Copyright @ {% now 'Y' %} -SkinHub All Rights Reserved</p>
+         </div>
+     </div>
+</body>
+</html>
