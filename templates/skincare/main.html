@@ -1,4 +1,3 @@
-
 {%load static%}
 {% load cart_template_tags %}
 <html lang="en">
@@ -38,7 +37,16 @@
                  <li> <a href="{% url "about" %}">About</a></li>
                  <li> <a href="{% url "blog" %}">Blog</a></li>
                  <li> <a href="{% url "accounts" %}">Account</a></li>
+                 <li> <a href="{% url "logout" %}">Logout</a></li>
              </ul>
+             {% if request.customer.is_authenticated %}
+             {{ request.customer|get_cart_count }}
+          <a href=" {% url 'accounts' %}"  > <img src="{% static "/image/shoppingbag.png"%}" width="30px" height="30px"> </a>
+             {% else %}
+             <a href="{%url 'accounts' %}">
+
+             </a>
+             {% endif %}
          </nav>
              {% if request.customer.is_authenticated %}
 
