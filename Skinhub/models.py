@@ -130,7 +130,21 @@ class Refund(models.Model):
         return f"{self.pk}"
 
 
+class Blog(models.Model):
+    class Meta:
+        verbose_name_plural = "blogs"
+        verbose_name = 'blog'
 
+    name = models.CharField(max_length=200, blank=True, null=True)
+    description = models.TextField(null=True, blank=True)
+    body = RichTextField(blank=True, null=True)
+    # slug = models.SlugField(null=True, blank=True)
+    image = CloudinaryField('image')
+    #blog_image = CloudinaryField('image')
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name or ""
 
 
 
