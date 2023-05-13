@@ -17,6 +17,7 @@ import string
 import random
 from django.contrib.auth.forms import UserCreationForm
 stripe.api_key = settings.STRIPE_TEST_KEY
+from django.views import generic
 
 
 # Create your views here.
@@ -32,8 +33,24 @@ class HomeView(ListView):
     def get_queryset(self):
         return Item.objects.order_by('tittle')
 
-def blog(request):
-    return render(request, "skincare/blog.html")
+class BlogView(generic.ListView):
+    model = Blog
+    template_name ='skincare/blog.html'
+    context_object_name = 'blogs'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True)
+
+
+class BlogDetailView(generic.DetailView):
+    model = Blog
+    template_name = 'skincare/blogdetail.html'
+    context_object_name = 'blogs'
+
+    def get(self, request, *args, **kwargs):
+        blogs = get_object_or_404(Blog, pk=kwargs['pk'])
+        context = {'blogs': blogs}
+        return render (request, 'skincare/blogdetail.html', context)
 
 class ShopView(ListView):
     context_object_name = 'items'
