@@ -432,7 +432,52 @@ form a{
 .container h1{
      font size: 15
 }
-#blog{
+.about-page{
+           padding: 50px 0;
+           background: radial-gradient(#fff, #F2D2BD);
+}
+.container h1{
+     font size: 15
+}
+.blog-content{
+     text-align: center;
+     background: #FFFFFF;
+     padding: 50px 0;
+     justify-content: center;
+     align-items: center
+     flex-direction: column;
+     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+     margin-top: 0;
+
+}
+.blog-content .blog-heading{
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.blog-page{
+      background: #FFFFFF;
+      padding: 50px;
+}
+
+.blog-page .img{
+        text-align: center;
+        padding: 40px 20px;
+        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.5;
+        width: 50px;
+        height: 50px;
+        margin-top: 20px;
+        border-radius: 50%;
+}
+.blog-page img :hover{
+         transform: translateY(-10px);
+}
+/*#blog{
            padding: 50px 0;
            display: flex;
            justify-content: center;
@@ -444,7 +489,7 @@ form a{
 }
 .blog-page{
          background: #ffffff;
-         /*background: radial-gradient(#fff, #F2D2BD);*/
+         /*background: radial-gradient(#fff, #F2D2BD);
 }
 .blog-page .img{
         text-align: center ;
@@ -501,7 +546,7 @@ form a{
           height: 100%;
           object-fit: cover;
           object-position: center;
-}
+}*/
 .products {
           background: #ffffff;
           margin-bottom: 20px;
