@@ -19,3 +19,6 @@ $pip install -r requirements.txt
 $python manage.py migrate $python manage.py runserver
 
 - Visit 127.0.0.1:8000 in your browser to enjoy the awesome app!
+
+REVIEWS PAGE
+![Screenshot (40)](https://github.com/Phenolah/Skinhub/assets/104977409/1d6e344e-a73d-427d-b421-20a298b07e90)
