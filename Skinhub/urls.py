@@ -9,7 +9,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.HomeView.as_view(), name="home"),
     path('blog/', views.BlogView.as_view(), name='blog'),
-    path('blog/', views.BlogDetailView.as_view(), name='blogdetail'),
+    path('blogdetail/<slug:slug>/', views.BlogDetailView.as_view(), name='blogdetail'),
     path('shop/', views.ShopView.as_view(), name="shop"),
     path('about/', views.about, name="about"),
     path("add-to-cart/<slug>/", views.add_to_cart, name="add-to-cart"),
