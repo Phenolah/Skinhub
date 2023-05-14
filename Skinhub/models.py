@@ -2,6 +2,7 @@ from django.db import models
 from cloudinary.models import CloudinaryField
 from django.urls import reverse
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 # Create your models here.
 
 
@@ -129,7 +130,6 @@ class Refund(models.Model):
     def __str__(self):
         return f"{self.pk}"
 
-
 class Blog(models.Model):
     class Meta:
         verbose_name_plural = "blogs"
@@ -138,14 +138,15 @@ class Blog(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(null=True, blank=True)
     body = RichTextField(blank=True, null=True)
-    # slug = models.SlugField(null=True, blank=True)
+    slug = models.SlugField(max_length=200, null=True, blank=True)
     image = CloudinaryField('image')
-    #blog_image = CloudinaryField('image')
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name or ""
 
+    def get_absolute_url(self):
+        return reverse('blogdetail', kwargs={'slug': self.slug})
 
 
 
