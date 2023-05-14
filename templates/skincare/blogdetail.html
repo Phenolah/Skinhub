@@ -3,7 +3,7 @@
 {%block content%}
 <!-- PortfolioDetailPage -->
 
-{% for blog in blogs %}
+
 <section>
 <div class="blogdetail">
     <div class="container">
@@ -21,9 +21,8 @@
 <section>
   <div class="blogsection">
     <div class='container'>
-     {{ blog.body|safe }}
+     {{ blogs.body|safe }}
     </div>
   </div>
 </section>
-{% endfor %}
 {% endblock%}
