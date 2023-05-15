@@ -27,3 +27,6 @@ REVIEWS PAGE
 HOMEPAGE RECOMMENDATIONS:
 ![Screenshot (44)](https://github.com/Phenolah/Skinhub/assets/104977409/d11b42c5-3a0e-4592-83c1-bf561dc0ce17)
 
+BLOG PAGE:
+
+![Screenshot (46)](https://github.com/Phenolah/Skinhub/assets/104977409/453b0a97-1405-4ef7-8dba-d97f75efe286)
