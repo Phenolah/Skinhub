@@ -20,19 +20,21 @@ class Item(models.Model):
     product_description = models.CharField(max_length=500, null=True )
     product_image = CloudinaryField('image')
     slug = models.SlugField(null=True,blank=True, unique=True)
+    
 
     def __str__(self):
         return self.tittle or " "
-
     def get_absolute_url(self):
+        # Returns the URL for displaying the item details
         return reverse("details", kwargs={"slug": self.slug})
 
     def get_cart_url(self):
+        # Returns the URL for adding the item to the cart
         return reverse("add-to-cart", kwargs={"slug": self.slug})
 
     def get_remove_cart_url(self):
+        # Returns the URL for removing the item from the cart
         return reverse("remove-from-cart", kwargs={"slug": self.slug})
-
 
 
 class OrderItem(models.Model):
