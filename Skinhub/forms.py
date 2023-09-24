@@ -96,11 +96,11 @@ class CheckoutForm(forms.Form):
         'class': 'form-control'
     }))
     class CouponForm(forms.Form):
-    code = forms.CharField(widget=forms.TextInput(attrs={
+             code = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Discount Code',
 
-    }))
+                 }))
 
 class RefundForm(forms.Form):
     ref_code = forms.CharField()
