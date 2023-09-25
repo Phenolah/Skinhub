@@ -40,3 +40,21 @@ Python3 -m venv venv
 <code> pyton  manage.py runserver </code>
 
 API will run on local host 
+
+#API ENDPOINTS
+
+##Home
+Home Page 
+Endpoint
+Login User
+Endpoint: https://team-piranha.onrender.com/api/login/
+
+Method: POST
+
+Description: Logs a user in to the event app.
+
+Parameters:
+
+Email: string
+
+pass_id: string
