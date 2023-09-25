@@ -65,9 +65,36 @@ Description: The blog page contains different blog post descriptions
 ##Blog detail
 Blog Article Page
 
-Endpoint <code> http://127.0.0.1:8000/blogdetail/<slug>:<slug> </code>
+Endpoint <code> http://127.0.0.1:8000/blogdetail/<slug:slug>/ </code>
 
 Method: GET
 
 Description: Blog detail page contains the Articles  of the Blog posts.
 
+<code> 
+  curl -X GET http://127.0.0.1:8000/blogdetail/slug-value/
+
+</code>
+
+##Shop
+Products Page
+
+Endpoint: <code> http://127.0.0.1:8000/shop</code>
+
+Method: GET
+
+Description: The shop page contains various skincare products on sale.
+
+##Shop Details
+Products details Page
+
+Endpoint: <code> http://127.0.0.1:8000/details/<slug>/ </code>
+
+Method: GET
+
+Description: The products details contains details of the products such as Description, Price, Add to Cart, Remove from cart and choose size
+
+<code> 
+  curl -X GET http://127.0.0.1:8000/details/slug-value/
+
+</code>
