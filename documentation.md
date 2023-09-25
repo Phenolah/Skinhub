@@ -101,16 +101,17 @@ Description: The products details contains details of the products such as Descr
 
 </code>
 
-##Shop Details
-Products details Page
+##About Details
+About Page
 
-Endpoint: <code> http://127.0.0.1:8000/details/<slug>/ </code>
+Endpoint: <code> http://127.0.0.1:8000/about </code>
 
 Method: GET
 
-Description: The products details contains details of the products such as Description, Price, Add to Cart, Remove from cart and choose size
+
+Description: The About page 
 
 <code> 
-  curl -X GET http://127.0.0.1:8000/details/slug-value/
+  curl -X GET http://127.0.0.1:8000/about
 
 </code>
