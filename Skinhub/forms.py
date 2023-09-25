@@ -9,6 +9,7 @@ from .models import *
 from django_countries.widgets import CountrySelectWidget
 from django.core.validators import RegexValidator
 from django.core import validators
+from django.contrib.auth.forms import UserCreationForm
 class PhotoForm(ModelForm):
     class Meta:
         model = Item
@@ -110,6 +111,22 @@ class RefundForm(forms.Form):
 
     }))
     email = forms.EmailField()
+
+class UserRegistrationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+class UserLoginForm(forms.Form):
+    username = forms.CharField(max_length=65)
+    password = forms.CharField(max_length=65, widget=forms.PasswordInput)
+
+class CouponForm(ModelForm):
+    class Meta:
+        model = DiscountCode
+        fields = "__all__"
+
+
 
 
 

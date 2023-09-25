@@ -20,10 +20,10 @@ urlpatterns = [
     path("remove-single-item-from-cart/<slug>/", views.remove_single_item_from_cart , name="remove-single-item-from-cart"),
     path('checkout/', views.CheckoutView.as_view(), name="checkout"),
     path('payment/<payment_option>', views.PaymentView.as_view(), name='payment'),
-    path('coupon/<code>', views.add_coupon, name="coupon"),
-    path('refund/', views.RequestRefundView.as_view(), name='refund')
-    path('login/', views.login, name='login'),
-    path('logout',LogoutView.as_view(next_page='login', template_name="registration/logout.html") , name='logout'),
+    path('coupon/<code>', views.AddCouponView.as_view(), name="coupon"),
+    path('refund/', views.RequestRefundView.as_view(), name='refund'),
+    path('login/', views.loginView, name='login'),
+    path('logout',auth_views.LogoutView.as_view(next_page='login', template_name="registration/logout.html") , name='logout'),
 
 
 

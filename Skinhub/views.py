@@ -245,8 +245,8 @@ def accounts(request):
 
         return render(request, "registration/accounts.html", context)
                         
-def login(request):
-    form = UserRegistrationForm(request.POST)
+def loginView(request):
+    form = UserLoginForm(request.POST)
     context = {
         'form': form
     }
@@ -341,7 +341,7 @@ class CheckoutView(View):
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an active order")
             return redirect("checkout")
- class PaymentView(View):
+class PaymentView(View):
     def get(self, *args, **kwargs):
         # Get the active order for the current user
         order = Order.objects.get(customer=self.request.user, ordered=False)
