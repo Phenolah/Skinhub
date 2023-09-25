@@ -132,14 +132,28 @@ Description: Adds item to cart
 ##Remove from Cart
 Remove from Cart Functionality
 
-Method: GET
+Method: DELETE
 
 Endpoint: <code> https://127.0.0.1:8000/remove-from-cart/<slug>/ </code>
 
-Description: Removes items from cart
+Description: Deletes items from cart
 
 <code> 
   curl -X GET http://127.0.0.1:8000/remove-from-cart/slug-value
+
+</code>
+
+##Removes a Single item from Cart
+Removes a single item from Cart Functionality
+
+Method: DELETE
+
+Endpoint: <code> https://127.0.0.1:8000/remove-single-item-from-cart/<slug>/ </code>
+
+Description: Deletes a single item the  from cart
+
+<code> 
+  curl -X GET http://127.0.0.1:8000/remove-single-item-from-cart/slug-value
 
 </code>
 
@@ -150,7 +164,7 @@ Method: POST
 
 Endpoint: <code> https://127.0.0.1:8000/accounts </code>
 
-Description: Users can e able to login and register accounts to be able to Shop
+Description: Users can be able to register an account to be able to Shop
 
 - Parameters
 Username:<code> STR </code>
@@ -160,6 +174,109 @@ Password2: <code> STR </code>
 
 <code>  CURL -X POST https://127.0.0.1:8000/accounts  </code>
 
-## 
+##Login Page
+Login Page
+
+Method: POST
+
+Endpoint: <code> https://127.0.0.1:8000/login </code>
+
+Description: Users can be able to login into the ecommerce website and shop for skincare items
+ 
+- Parameters
+Username:<code> STR </code>
+Password: <code> STR </code>
+
+
+<code>  CURL -X POST https://127.0.0.1:8000/login  </code>
+
+##Login Page
+Login Page
+
+Method: POST
+
+Endpoint: <code> https://127.0.0.1:8000/login </code>
+
+Description: Users can be able to login into the ecommerce website and shop for skincare items
+ 
+- Parameters
+Username:<code> STR </code>
+Password: <code> STR </code>
+
+
+<code>  CURL -X POST https://127.0.0.1:8000/login  </code>
+
+##Logout Page
+Logout Page
+
+Method: GET
+
+Endpoint: <code> https://127.0.0.1:8000/logout </code>
+
+Description: Logs users out of their accounts
+
+<code> CURL -X GET https://127.0.0.1:8000/logout </code>
+
+##Order summary Page
+Order summary Page
+
+Method: GET
+
+Endpoint: <code> https://127.0.0.1:8000/Order_Summary</code>
+
+Description: Displays the order summary of a logged in user
+
+<code> CURL -X GET https://127.0.0.1:8000/Order_Summary </code>
+
+##Checkout Page
+Checkout Page
+
+Method: POST
+
+Endpoint: <code> https://127.0.0.1:8000/checkout</code>
+
+Description: Displays the checkout page that contains details for payment and postal details
+
+- Parameters:
+street_address: <code> STR </code>
+apartment_address: <code> STR </code>
+town: <code> STR </code>
+state: <code> STR </code>
+country: <code> STR </code>
+zip: <code> STR </code>
+payment_info: <code> STR </code>
+phone: <code> INT </code>
+email: <code> STR </code>
+
+
+<code> CURL -X POST https://127.0.0.1:8000/checkout </code>
+
+##Payment Options
+Payment Options Page
+
+Method: POST
+
+Endpoint: <code> https://127.0.0.1:8000/payment/<payment_option></code>
+
+Description: User chooses a payment option to checkout
+
+<code> CURL -X GET https://127.0.0.1:8000/payment/slug-payment-option </code>
+
+
+##Coupon Page
+Coupon Page
+
+Method: POST
+
+Endpoint: <code> https://127.0.0.1:8000/coupon/<code></code>
+
+Description: User can key in their coupon code to get a discount when paying
+
+Parameters:
+code: <code> INT </code
+<code> CURL -X POST https://127.0.0.1:8000/coupon/coupon_code </code>
+
+
+
 
 
