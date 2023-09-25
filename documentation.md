@@ -108,10 +108,58 @@ Endpoint: <code> http://127.0.0.1:8000/about </code>
 
 Method: GET
 
-
 Description: The About page 
 
 <code> 
   curl -X GET http://127.0.0.1:8000/about
 
 </code>
+
+##Add to Cart
+Add to Cart Functionality
+
+Method: GET
+
+Endpoint: <code> https://127.0.0.1:8000/add-to-cart/<slug>/ </code>
+
+Description: Adds item to cart
+
+<code> 
+  curl -X GET http://127.0.0.1:8000/add-to-cart/slug-value
+
+</code>
+
+##Remove from Cart
+Remove from Cart Functionality
+
+Method: GET
+
+Endpoint: <code> https://127.0.0.1:8000/remove-from-cart/<slug>/ </code>
+
+Description: Removes items from cart
+
+<code> 
+  curl -X GET http://127.0.0.1:8000/remove-from-cart/slug-value
+
+</code>
+
+##Accounts/Registration Page
+Registration Page
+
+Method: POST
+
+Endpoint: <code> https://127.0.0.1:8000/accounts </code>
+
+Description: Users can e able to login and register accounts to be able to Shop
+
+- Parameters
+Username:<code> STR </code>
+Email: <code> STR </code>
+Password1: <code> STR </code>
+Password2: <code> STR </code>
+
+<code>  CURL -X POST https://127.0.0.1:8000/accounts  </code>
+
+## 
+
+
