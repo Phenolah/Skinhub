@@ -10,9 +10,33 @@ Before you begin, ensure you have met the following requirements:
 #Installation
 ##Setting up on Local Machine
 
--Clone the repository
+- Clone the repository
 <code> 
 git clone (repository_url)
 
  cd <repository_directory)
 </code>
+
+- Create a Virtual Environment
+
+<code> 
+Python3 -m venv venv
+</code> 
+
+ - Activate the Virtual Environment
+<code>
+
+    Linux: source venv/bin/activate   
+    
+    Windows: venv\Scripts\activate
+ </code>
+
+ - Install Project Dependancies
+
+<code> pip install -r requirements.txt </code>
+
+- Start the Django Server
+
+<code> pyton  manage.py runserver </code>
+
+API will run on local host 
