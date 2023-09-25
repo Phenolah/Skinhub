@@ -45,16 +45,29 @@ API will run on local host
 
 ##Home
 Home Page 
-Endpoint
-Login User
-Endpoint: https://team-piranha.onrender.com/api/login/
 
-Method: POST
+Endpoint: <code> http://127.0.0.1:8000 </code>
 
-Description: Logs a user in to the event app.
+Method: GET
 
-Parameters:
+Description: This is the Home page with an overview about the ecommerce product.
 
-Email: string
 
-pass_id: string
+##Blog
+Blog Page
+
+Endpoint: <code> http://127.0.0.1:8000/blog </code>
+
+Method: GET
+
+Description: The blog page contains different blog post descriptions
+
+##Blog detail
+Blog Article Page
+
+Endpoint <code> http://127.0.0.1:8000/blogdetail/<slug>:<slug> </code>
+
+Method: GET
+
+Description: Blog detail page contains the Articles  of the Blog posts.
+
