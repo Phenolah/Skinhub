@@ -281,13 +281,11 @@ Refund Page
 
 Method: GET
 
-Endpoint: <code> https://127.0.0.1:8000/coupon/<code></code>
+Endpoint: <code> https://127.0.0.1:8000/refund</code>
 
 Description: User can key in their coupon code to get a discount when paying
 
-Parameters:
-code: <code> INT </code
-<code> CURL -X POST https://127.0.0.1:8000/coupon/coupon_code </code>
+<code> CURL -X GET https://127.0.0.1:8000/refund</code>
 
 
 
