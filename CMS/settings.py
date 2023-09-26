@@ -28,8 +28,8 @@ SECRET_KEY = 'django-insecure-b0+8qlv%-c0k&f*hy3pkhmy(f3450b(-*kqnt9qvvtedsotnz1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-#"127.0.0.1", "phenolah-cms.herokuapp.com"
+ALLOWED_HOSTS = ['skinhub.onrender.com', '*', "127.0.0.1" ]
+
 
 # Application definition
 
