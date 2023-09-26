@@ -336,9 +336,7 @@ Endpoint: <code> https://127.0.0.1:8000/refund </code>
 
 Description: User can key in their coupon code to get a discount when paying
 
-<code> 
-CURL -X GET https://127.0.0.1:8000/refund
-</code>
+<code> CURL -X GET https://127.0.0.1:8000/refund</code>
 
 
 
