@@ -332,9 +332,7 @@ Refund Page
 
 Method: GET
 
-Endpoint: <code> 
-https://127.0.0.1:8000/refund
-</code>
+Endpoint: <code> https://127.0.0.1:8000/refund </code>
 
 Description: User can key in their coupon code to get a discount when paying
 
@@ -346,3 +344,4 @@ CURL -X GET https://127.0.0.1:8000/refund
 
 
 
+pip
