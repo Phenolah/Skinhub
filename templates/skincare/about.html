@@ -29,12 +29,12 @@
 {% endif %}
 <span class="hello-msg"> Hello {{user.username}}</span>
 
-    <link rel="stylesheet" href="{% staticfiles "/css/style.css"%}">
+    <link rel="stylesheet" href="{% static "/css/style.css"%}">
     <div class="header">
      <div class="container">
          <div class="navbar">
          <div class="logo">
-             <img  src="{% staticfiles "image/logoicon1.png" %}" alt="no image found">
+             <img  src="{% static "image/logoicon1.png" %}" alt="no image found">
          </div>
          <nav>
              <ul>
@@ -76,7 +76,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-2">
-                    <img src="{% staticfiles "image/Skincare.JPG"%}" turn co alt="no image">
+                    <img src="{% static "image/Skincare.JPG"%}" turn co alt="no image">
                 </div>
                 <div class="col-2">
                     <h1 >Only Healthy Skin Days Ahead</h1>
@@ -101,7 +101,7 @@
 
                 </div>
                 <div class="col-2">
-                    <img src="{% staticfiles "image/Skincare.JPG"%}"  alt="">
+                    <img src="{% static "image/Skincare.JPG"%}"  alt="">
 
                 </div>
             </div>
