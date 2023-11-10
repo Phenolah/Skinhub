@@ -265,7 +265,7 @@ def loginView(request):
                 return redirect('home')
             else:
                 # If the user credentials are invalid, redirect to the home page
-                return redirect('home')
+                return redirect('login')
         # Render the login form
         return render(request, "registration/login.html", context)
 
